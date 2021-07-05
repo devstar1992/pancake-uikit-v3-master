@@ -1,6 +1,6 @@
 {
   "name": "@pancakeswap-v3/uikit",
-  "version": "0.15.1",
+  "version": "0.15.2",
   "description": "Fork for pancake projects",
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
