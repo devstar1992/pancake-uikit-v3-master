@@ -2919,43 +2919,43 @@ var connectors = [
         title: "Metamask",
         icon: Icon$15,
         connectorId: ConnectorNames.Injected,
-        network: [1, 56],
+        network: [1, 3, 56, 97, 137, 80001],
     },
     {
         title: "TrustWallet",
         icon: Icon$18,
         connectorId: ConnectorNames.Injected,
-        network: [1, 56],
+        network: [1, 3, 56, 97, 137, 80001],
     },
     {
         title: "MathWallet",
         icon: Icon$16,
         connectorId: ConnectorNames.Injected,
-        network: [1, 56],
+        network: [1, 3, 56, 97, 137, 80001],
     },
     {
         title: "TokenPocket",
         icon: Icon$17,
         connectorId: ConnectorNames.Injected,
-        network: [1, 56],
+        network: [1, 3, 56, 97, 137, 80001],
     },
     {
         title: "WalletConnect",
         icon: Icon$19,
         connectorId: ConnectorNames.WalletConnect,
-        network: [1, 56],
+        network: [1, 3, 56, 97, 137, 80001],
     },
     {
         title: "Binance Chain Wallet",
         icon: Icon$1a,
         connectorId: ConnectorNames.BSC,
-        network: [56],
+        network: [1, 56, 97],
     },
     {
         title: "SafePal Wallet",
         icon: Icon$1b,
         connectorId: ConnectorNames.Injected,
-        network: [1, 56],
+        network: [1, 3, 56, 97, 137, 80001],
     },
 ];
 var connectorLocalStorageKey = "connectorId";
@@ -3015,12 +3015,13 @@ var CopyToClipboard = function (_a) {
 };
 var templateObject_1$J, templateObject_2$g;
 
+/* eslint-disable no-nested-ternary */
 var AccountModal = function (_a) {
-    var account = _a.account, logout = _a.logout, _b = _a.onDismiss, onDismiss = _b === void 0 ? function () { return null; } : _b;
+    var account = _a.account, network = _a.network, logout = _a.logout, _b = _a.onDismiss, onDismiss = _b === void 0 ? function () { return null; } : _b;
     return (React.createElement(Modal, { title: "Your wallet", onDismiss: onDismiss },
         React.createElement(Text, { fontSize: "20px", bold: true, style: { whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis", marginBottom: "8px" } }, account),
         React.createElement(Flex, { mb: "32px" },
-            React.createElement(LinkExternal, { small: true, href: "https://bscscan.com/address/" + account, mr: "16px" }, "View on BscScan"),
+            network === 56 ? (React.createElement(LinkExternal, { small: true, href: "https://bscscan.com/address/" + account, mr: "16px" }, "View on BscScan")) : network === 97 ? (React.createElement(LinkExternal, { small: true, href: "https://testnet.bscscan.com/address/" + account, mr: "16px" }, "View on BscScan (Testnet)")) : network === 1 ? (React.createElement(LinkExternal, { small: true, href: "https://etherscan.io/address/" + account, mr: "16px" }, "View on EtherScan")) : network === 3 ? (React.createElement(LinkExternal, { small: true, href: "https://ropsten.etherscan.io/address/" + account, mr: "16px" }, "View on RostenScan")) : network === 137 ? (React.createElement(LinkExternal, { small: true, href: "https://polygonscan.com/address/" + account, mr: "16px" }, "View on PolygonScan")) : network === 80001 ? (React.createElement(LinkExternal, { small: true, href: "https://mumbai.polygonscan.com/address/" + account, mr: "16px" }, "View on PolygonScan (Testnet)")) : (React.createElement(LinkExternal, { small: true, href: "https://bscscan.com/address/" + account, mr: "16px" }, "View on BscScan")),
             React.createElement(CopyToClipboard, { toCopy: account }, "Copy Address")),
         React.createElement(Flex, { justifyContent: "center" },
             React.createElement(Button, { scale: "sm", variant: "secondary", onClick: function () {
@@ -3032,7 +3033,7 @@ var AccountModal = function (_a) {
 
 var useWalletModal = function (login, logout, account, network) {
     var onPresentConnectModal = useModal(React.createElement(ConnectModal, { login: login, network: network || 56 }))[0];
-    var onPresentAccountModal = useModal(React.createElement(AccountModal, { account: account || "", logout: logout }))[0];
+    var onPresentAccountModal = useModal(React.createElement(AccountModal, { account: account || "", logout: logout, network: network || 56 }))[0];
     return { onPresentConnectModal: onPresentConnectModal, onPresentAccountModal: onPresentAccountModal };
 };
 
